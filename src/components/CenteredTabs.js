@@ -11,11 +11,11 @@ import Typography from '@material-ui/core/Typography';
 
 function TabContainer({ children, dir }) {
     return (
-      <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
-        {children}
-      </Typography>
+        <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+            {children}
+        </Typography>
     );
-  }
+}
 
 const styles = {
     root: {
@@ -32,6 +32,12 @@ class CenteredTabs extends React.Component {
         this.setState({ value });
     };
 
+    UNSAFE_componentWillUpdate(nextProps, nextState) {
+        if (nextProps.BaseInfo.race != null && this.props.BaseInfo.race === null && this.props.BaseInfo.class === null) {
+            nextState.value = 2;
+        }
+    }
+
     render() {
         const { classes, theme } = this.props;
 
@@ -39,16 +45,16 @@ class CenteredTabs extends React.Component {
             <Paper className={classes.root}>
                 <AppBar position="static" color="default">
                     <Tabs fullWidth={true}
-                        style={{ maxWidth: '50em'}}
+                        style={{ maxWidth: '50em' }}
                         value={this.state.value}
                         onChange={this.handleChange}
                         indicatorColor="primary"
                         textColor="primary"
                         centered
                     >
-                        <Tab label="Class Features" disabled={this.props.BaseInfo.class===null}/>
+                        <Tab label="Class Features" disabled={this.props.BaseInfo.class === null} />
                         <Tab label="Spells" disabled />
-                        <Tab label="Race Traits" disabled={this.props.BaseInfo.race===null}/>
+                        <Tab label="Race Traits" disabled={this.props.BaseInfo.race === null} />
                     </Tabs>
                 </AppBar>
                 <SwipeableViews
@@ -68,6 +74,6 @@ class CenteredTabs extends React.Component {
 CenteredTabs.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
-  };
-  
-  export default withStyles(styles, { withTheme: true })(CenteredTabs);
+};
+
+export default withStyles(styles, { withTheme: true })(CenteredTabs);
