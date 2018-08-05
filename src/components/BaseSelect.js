@@ -19,7 +19,7 @@ class BaseSelect extends Component {
     };
 
     handleChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({ [event.target.name]: event.target.value }, () => this.props.onUpdate(event));
     };
     createSelect = () => {
         let select = []
