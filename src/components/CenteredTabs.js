@@ -33,8 +33,9 @@ class CenteredTabs extends React.Component {
     };
 
     UNSAFE_componentWillUpdate(nextProps, nextState) {
-        if (nextProps.BaseInfo.race != null && this.props.BaseInfo.race === null && this.props.BaseInfo.class === null) {
-            nextState.value = 2;
+        if (this.state.value === -1) {
+            if (nextProps.BaseInfo.class != null) nextState.value = 0;
+            if (nextProps.BaseInfo.race != null) nextState.value = 2;
         }
     }
 
